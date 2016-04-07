@@ -1,6 +1,7 @@
 package com.Momo;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,26 +11,33 @@ import java.awt.event.ActionListener;
 public class CreditCardValidator extends JFrame{
     private JTextField VisaCardNumber;
     private JButton validateButton;
-    private JButton validOrNotValidButton;
+    //private JButton validOrNotValidButton;
     private JPanel rootPanel;
     private JButton quitButton;
+    private JTextField cardValidOrNotValid;
 
     CreditCardValidator(){
         super("Credit Card Validator");
         setContentPane(rootPanel);
+        setPreferredSize(new Dimension(400,175));
+        cardValidOrNotValid.setPreferredSize(new Dimension(20, 40));
+        VisaCardNumber.setPreferredSize(new Dimension(100, 400));
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        cardValidOrNotValid.setText("Your card is: ");
         validateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String cardText = VisaCardNumber.getText();
                 boolean valid = isCreditCardVailid(cardText);
+
                 if(valid){
-                    validOrNotValidButton.setText("Credit Card is valid");
+                   //cardValidOrNotValid.setText("Credit Card is valid");
+                    JOptionPane.showConfirmDialog(rootPanel, "Valid card", "Confirm ", JOptionPane.CLOSED_OPTION);
                 }
                 else {
-                    validOrNotValidButton.setText("Credit card is not valid");
+                    JOptionPane.showMessageDialog(rootPanel, "Card is not Valid, re-enter number ", "error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
